@@ -1,0 +1,55 @@
+#####################################################
+# Makefile: Makefile for Assignment3 EECS22 Fall2011
+#
+# 10/10/11 Weiwei Chen: initial solution version                  
+#
+#####################################################
+
+# design names
+DESIGN = PhotoLab Test
+CC = gcc
+OPT = -ansi -Wall
+DEBUG = -DDEBUG
+
+all: PhotoLab Test
+
+#target to generate PhotoLab.o
+PhotoLab.o: PhotoLab.c
+	$(CC) -c PhotoLab.c -o PhotoLab.o $(OPT)
+
+#target to generate FileIO.o
+FileIO.o: FileIO.h FileIO.c
+	$(CC) -c FileIO.c -o FileIO.o $(OPT)
+
+#target to generate DIPs.o
+DIPs.o: DIPs.h DIPs.c
+	$(CC) -c DIPs.c -o DIPs.o $(OPT)
+
+#target to generate Advanced.o
+Advanced.o: Advanced.h Advanced.c
+	$(CC) -c Advanced.c -o Advanced.o $(OPT)
+
+#target to generate PhotoLab
+PhotoLab: PhotoLab.o FileIO.o DIPs.o Advanced.o
+	$(CC) PhotoLab.o FileIO.o DIPs.o Advanced.o -o PhotoLab $(OPT)
+
+#target to generate FileIO_DEBUG.o
+FileIO_DEBUG.o: FileIO.h FileIO.c
+	$(CC) -c FileIO.c -o FileIO_DEBUG.o $(DEBUG) $(OPT)
+
+#target to generate Advanced_DEBUG.o
+Advanced_DEBUG.o: Advanced.h Advanced.c
+	$(CC) -c Advanced.c -o Advanced_DEBUG.o $(DEBUG) $(OPT)
+
+#target to generate Test.o
+Test.o: Test.c
+	$(CC) -c Test.c -o Test.o $(OPT)
+
+#target to generate Test
+Test: Test.o FileIO_DEBUG.o DIPs.o Advanced_DEBUG.o
+	$(CC) Test.o FileIO_DEBUG.o DIPs.o Advanced_DEBUG.o -o Test $(OPT)
+	
+#target to clean the directory
+clean:
+	rm -f *.o *.jpg $(DESIGN)
+    

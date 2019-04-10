@@ -1,0 +1,6 @@
+/* EECS22 F11- HW1 */
+/* author: Weiwei Chen */
+
+Generate the random number by using srand() function. Use while loop to check whether the guessed number is the same as the generated one, if not print out the hints and then continue to the next loop. 
+
+The maximum number of steps needed to guess a number in the range of [1-n] is log(n)/log(2).
